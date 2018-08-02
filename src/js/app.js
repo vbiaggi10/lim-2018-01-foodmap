@@ -1,5 +1,6 @@
 let map;
 let infowindow;
+var markers = [];
 let placesList = document.querySelector('.places-list');
 placesList.innerHTML = '';
 const searchPlaces = document.querySelector('#search');
@@ -15,9 +16,9 @@ function initMap() {
 		map = new google.maps.Map(document.getElementById("map"), {
 			center: pyrmont,
 			zoom: 15.5,
-			mapTypeId: google.maps.MapTypeId.MAP
+			mapTypeId: google.maps.MapTypeId.roadmap
 		});
-
+		console.log(map)
 		infowindow = new google.maps.InfoWindow();
 
 		let request = {
@@ -43,16 +44,13 @@ function callback(results, status) {
 		let places = results;
 		searchPlaces.addEventListener('keyup', () => {
 			search = searchPlaces.value;
-
+			
 			function checkAdult(places) {
 				return places.name.toLowerCase().indexOf(search.toLowerCase()) > -1;
 			}
 			let placesSearched = places.filter(checkAdult);
 			placesList.innerHTML = '';
-			var div = document.querySelector('.gmnoprint');
-			while (div.hasChildNodes()){
-				div.removeChild(div.lastChild);
-		}
+			deleteMarker();
 			for (let i = 0; i < placesSearched.length; i++) {
 				createMarker(placesSearched[i]);
 				paintPlaces(placesSearched[i]);
@@ -62,16 +60,25 @@ function callback(results, status) {
 }
 
 function createMarker(place) {
-	let marker = new google.maps.Marker({
+	// marker.setMap(null);
+	var marker = new google.maps.Marker({
 		map: map,
 		position: place.geometry.location,
 		icon: 'img/location1.png',
 		title: place.name,
+		animation: google.maps.Animation.BOUNCE,
 	});
 	google.maps.event.addListener(marker, 'click', function () {
 		infowindow.setContent(place.name);
 		infowindow.open(map, this);
 	});
+	markers.push(marker);
+}
+
+function deleteMarker(){	
+  for (removingMarkers in markers) {
+    markers[removingMarkers].setMap(null);
+  }		
 }
 
 const paintPlaces = (place) => {
