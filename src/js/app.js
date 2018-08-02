@@ -121,8 +121,8 @@ const paintPlaces = (place) => {
 	const placeContainer = document.createElement('div');
 
 	placeContainer.innerHTML = `
-	<div class="col s4 container-photo">
-		<img src="${photo}" alt="${place.name}" class="card photo" style="width:100%" >	
+	<div class="col s12 m6 l4 container-photo">
+		<img src="${photo}" alt="${place.name}" class="card photo" style="width:100%">	
 		<!-- <a class="card waves-effect waves-light btn modal-trigger place-container" href="#modal1${place.place_id}" style="background: url(${photo}) no-repeat center; background-size: 100% 150px"></a> -->
 		<div class="middle">
 			<a class="place-name modal-trigger" href="#modal1${place.place_id}">${place.name}</a>
