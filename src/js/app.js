@@ -1,7 +1,8 @@
-var map;
-var infowindow;
+let map;
+let infowindow;
 let placesList = document.querySelector('.places-list');
 placesList.innerHTML = '';
+const searchPlaces = document.querySelector('#search');
 
 function initMap() {
 	navigator.geolocation.getCurrentPosition(function (pos) {
@@ -9,23 +10,23 @@ function initMap() {
 		latitude = pos.coords.latitude;
 		longitude = pos.coords.longitude;
 
-		var pyrmont = new google.maps.LatLng(latitude, longitude);
+		let pyrmont = new google.maps.LatLng(latitude, longitude);
 
 		map = new google.maps.Map(document.getElementById("map"), {
 			center: pyrmont,
-			zoom: 16,
+			zoom: 15.5,
 			mapTypeId: google.maps.MapTypeId.MAP
 		});
 
 		infowindow = new google.maps.InfoWindow();
 
-		var request = {
+		let request = {
 			location: pyrmont,
 			radius: 500,
 			types: ['restaurant', 'food']
 		};
 
-		var service = new google.maps.places.PlacesService(map);
+		let service = new google.maps.places.PlacesService(map);
 		service.nearbySearch(request, callback);
 		// service.textSearch(request, callback);
 	});
@@ -33,32 +34,52 @@ function initMap() {
 
 function callback(results, status) {
 	if (status == google.maps.places.PlacesServiceStatus.OK) {
-		for (var i = 0; i < results.length; i++) {
+		console.log(results.length)
+		for (let i = 0; i < results.length; i++) {
 			createMarker(results[i]);
+			paintPlaces(results[i]);
+			console.log(results[i])
 		}
+		let places = results;
+		searchPlaces.addEventListener('keyup', () => {
+			search = searchPlaces.value;
+
+			function checkAdult(places) {
+				return places.name.toLowerCase().indexOf(search.toLowerCase()) > -1;
+			}
+			let placesSearched = places.filter(checkAdult);
+			placesList.innerHTML = '';
+			var div = document.querySelector('.gmnoprint');
+			while (div.hasChildNodes()){
+				div.removeChild(div.lastChild);
+		}
+			for (let i = 0; i < placesSearched.length; i++) {
+				createMarker(placesSearched[i]);
+				paintPlaces(placesSearched[i]);
+			}
+		})
 	}
 }
 
 function createMarker(place) {
-	var marker = new google.maps.Marker({
+	let marker = new google.maps.Marker({
 		map: map,
 		position: place.geometry.location,
 		icon: 'img/location1.png',
 		title: place.name,
 	});
-	paintPlaces(place);
 	google.maps.event.addListener(marker, 'click', function () {
 		infowindow.setContent(place.name);
 		infowindow.open(map, this);
 	});
 }
 
-let paintPlaces = (place) => {
+const paintPlaces = (place) => {
 	console.log(place)
 	let photo, rating, status, direction;
-	var photos = place.photos;
+	let photos = place.photos;
 	if (!photos) {
-		return;
+		return photos = 'img/suspicious.png';
 	}
 
 	if (place.hasOwnProperty('photos')) {
@@ -68,7 +89,7 @@ let paintPlaces = (place) => {
 		});
 		// p1.innerHTML = place.photos[0].html_attributions[0];
 	} else {
-		photo = '';
+		photo = 'img/suspicious.png';
 	}
 	if (place.hasOwnProperty('opening_hours')) {
 		if (place.opening_hours.open_now === false) {
