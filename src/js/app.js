@@ -83,9 +83,9 @@ const paintPlaces = (place) => {
 	console.log(place)
 	let photo, rating, status, direction;
 	let photos = place.photos;
-	if (!photos) {
+	/* if (!photos) {
 		return photos = 'img/suspicious.png';
-	}
+	} */
 
 	if (place.hasOwnProperty('photos')) {
 		photo = photos[0].getUrl({
@@ -94,7 +94,7 @@ const paintPlaces = (place) => {
 		});
 		// p1.innerHTML = place.photos[0].html_attributions[0];
 	} else {
-		photo = 'img/suspicious.png';
+		photo = 'img/location.png';
 	}
 	if (place.hasOwnProperty('opening_hours')) {
 		if (place.opening_hours.open_now === false) {
@@ -123,7 +123,7 @@ const paintPlaces = (place) => {
 	<div class="container-photo card">
 		<div class="card-image">
 			<a class="modal-trigger" href="#modal1${place.place_id}"><img src="${photo}" alt="${place.name}" class="card photo" style="width:100%"></a>
-			<span class="card-title">${place.name}</span>
+			<span class="card-title modal-trigger" href="#modal1${place.place_id}">${place.name}</span>
 			<!-- <a class="card waves-effect waves-light btn modal-trigger place-container" href="#modal1${place.place_id}" style="background: url(${photo}) no-repeat center; background-size: 100% 150px"></a> -->
 			<!-- <div class="middle">
 				<a class="place-name modal-trigger" href="#modal1${place.place_id}">${place.name}</a>
@@ -135,7 +135,7 @@ const paintPlaces = (place) => {
 			<div id="modal-map-${place.place_id}" style="width: 100%; height: 150px"></div>
 			<div class="place-info">
 				<h4>${place.name}</h4>
-				<p>Clasificación: ${rating} estrellas</p>
+				<p>Clasificación: ${rating}</p>
 				<p>Estado: ${status}</p>
 				<p>Dirección: ${direction}</p>
 			</div>
@@ -168,6 +168,4 @@ const paintPlaces = (place) => {
 		animation: google.maps.Animation.BOUNCE,
 		title: place.name
 	});
-
-
 }
