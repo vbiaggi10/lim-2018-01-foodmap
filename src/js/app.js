@@ -141,7 +141,7 @@ const paintPlaces = (place) => {
 			</div>
     </div>
     <div class="modal-footer">
-      <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+      <a href="#!" class="modal-close waves-effect waves-green btn-flat">Aceptar</a>
     </div>
   </div>
           

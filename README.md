@@ -4,6 +4,20 @@ Crea una web-app que a través de un input pueda filtrar los restaurantes
 que se encuentran cerca de ti *(Tú decides la estructura que tendrán tus datos,
 puedes crear una lista de restaurantes en un arreglo, en un objeto, consumir una API, etc. Lo importante es que el contenido debe ser dinámico y no estático y el diseño es totalmente libre)*.
 
+## DEMO de la aplicación.
+
+[Link a demo](https://vbiaggi10.github.io/lim-2018-01-foodmap/src/splash.html)
+
+![Con titulo](src/img/demofoodmap.gif "Foodmap")
+
+
+## Prototipo de la aplicación.
+
+[Link a prototipo de baja fidelidad](https://www.figma.com/proto/St8rLnTIoy9Loelk8CyKairu/Untitled?node-id=1%3A36&scaling=scale-down)
+
+![Con titulo](src/img/prototipo.gif "Foodmap")
+
+
 #### Flujo de la aplicación.
 
 Vista splash con duración de 2 segundos que redirecciona a tu vista
