@@ -77,13 +77,13 @@
 	} */
 }
 
-@media only screen and (min-width: 480px) {
+@media only screen and (min-width: 600px) {
 	.brand-logo img {
-		height: 64px;
+		height: 54px;
 	}
 	#map {
 		top: 0;
-		width: 50vw;
+		width: 70vw;
 		margin: 30px auto;
 	}
 }

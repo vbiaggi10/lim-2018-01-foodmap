@@ -117,10 +117,10 @@ const paintPlaces = (place) => {
 	}
 
 	const placeContainer = document.createElement('div');
-	placeContainer.setAttribute('class','place-container')
+	placeContainer.setAttribute('class','col s12 m6 l4 place-container')
 
 	placeContainer.innerHTML = `
-	<div class="col s12 m6 l4 container-photo card">
+	<div class="container-photo card">
 		<div class="card-image">
 			<a class="modal-trigger" href="#modal1${place.place_id}"><img src="${photo}" alt="${place.name}" class="card photo" style="width:100%"></a>
 			<span class="card-title">${place.name}</span>
